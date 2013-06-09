@@ -1,0 +1,96 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\title{CMSC 6950\\ Term Project \\  TCP performance in  MANET  with TCL Script  }
+\date{\today}
+\author{Norbert Obiekwe:201093721\\ Computer Science,MUN}
+  	% expects file "myrefs.bib"
+\begin{document}
+\maketitle
+
+\section{Background and Motivation}
+
+My project background is on mobile ad hoc networks (MANET) and using a TCL script to create parameters for visualizing TCP reactions as TCP  packet travel from one node to another in a MANET environment.A mobile ad-hoc network (MANET) is a special type of wireless networks. It consists of a collection of peer mobile nodes that are capable of communicating with each other without help from a fixed  infrastructure \cite{chen2004tcp}. 
+The interconnections between nodes are capable of changing on a continual and arbitrary basis. Nodes within each other's radio range communicate directly via wireless links, while those that are far apart use other nodes as relays in a multi-hop routing fashion. This kind of network (MANET) is mostly being utilized by the military and in remote emergency situations where a network is needed.\\A MANET just like a normal structured network is powered by a  network protocol know as Transport Control Protocol(TCP), however, the TCP performance in MANET is not so optimized like in a structured network in that there are still performance issues with TCP in MANET. As a result, this  performance issues adversely  affects the MANET performance. 
+
+The motivation behind the chosen background is that in some  environment such as camping field  and military field operations,there are needs to have adequate wireless communication in these environments where the traditional wireless network infrastructure is not pragmatic.Setting up this kind of network is different from the normal traditional wireless network.Thus, MANET  infrastructure are configured with with special care to avoid link errors.Therefore it's  interesting to study ways to optimize the MANET protocol performances. A reliable MANET infrastructure entails  having a reliable communication  link among the interconnected nodes in the network which assures that messages and communication can get across to different parties on time in an emergency situations.
+
+\section{Task Performed}
+
+In this project, I did a study on the project background through literature reviews. I highlighted some of  TCP functions in a network, the common problems or factors affecting TCP performance in MANET and the proposed solutions that would address the TCP performance  problem in MANET. Using TCL script, I created parameters to visualize  TCP reactions as packet moves from one node to another.It will be in such a way that packet will be sent from node 1 to node 2 to node 3. The packet ability to reach to their intended destination all depends on the TCP action in the nodes.During this process, I will be able to analyze the  TCP performance through the packet movements, the time it took  for a packet from node 1 to reach to node 2, the number of packet sent, the ones lost on the way.  
+
+For my project, I hope to discover other ways TCP can recognize the link actions better in a way that it wont deteriorate the MANET performance. The TCP actions in  MANET will be analyzed in a simulated environment, using NS2 simulator with the scripting done in TCL syntax.
+\subsection{Literature Support}
+Transport controls Protocol (TCP) is a network transport protocol that enables a reliable and guaranteed packet transfer over network. It also enables packet retransmission in case of lost packets. 
+
+Some TCP functions include \cite{chen2004tcp}
+\begin{enumerate}
+\item Addressing/Multiplexing: TCP is used by many different applications for their transport protocol. Therefore, an important job for TCP is multiplexing the data received from these different processes so they can be sent out using the underlying network-layer protocol. At the same time, these higher-layer application processes are identified using TCP ports.
+\item Connection Establishment, Management and Termination: TCP provides a set of procedures that devices follow to negotiate and establish a TCP connection over which data can travel.\item Data Handling and Packaging: TCP defines a mechanism by which applications are able to send data to it from higher layers. This data is then packaged into messages to be sent to the destination TCP software.\item Data Transfer: Conceptually, the TCP implementation on a transmitting device is responsible for the transfer of packaged data to the TCP process on the other device.
+\item Providing Reliability and Transmission Quality Services: TCP includes a set of services and features that allow an application to consider the sending of data using the protocol to be “reliable”. This means that normally, a TCP application doesn't have to worry about data being sent and never showing up, or arriving in the wrong order.
+\item Providing Flow Control and Congestion Avoidance Features: TCP allows the flow of data between two devices to be controlled and managed. It also includes features to deal with congestion that may be experienced during communication between devices.
+\end{enumerate}
+Moreover, TCP operation involves a process of ‘handshake’ between the sender node and the receiver node. The handshake process is to assure that the sent packet was received by the receiver in a stipulated time.The sender node responds with an acknowledgment message to the sender upon receiving the packet. If there are no acknowledgments after some timing, the sender node assumes that the packet was lost and it will re-send the packet.				
+ Traditionally, in a wired network, in other to reduce congestion, TCP upon sensing that a packet loss is due to congestion would consequently invoke its congestion control mechanism whenever a packet loss is detected.  However, TCP invoking the same congestion control in a Mobile Ad hoc network (MANET) would lead to network degradation and poor TCP performance in MANET, because most times congestions in MANET are not always due to packet loss but rather could be due to node mobility or link failure, in this case, TCP invoking its congestion control with the assumption that the failure is due to network congestion would be faulty by causing network degradation and unfairness\cite{wang2002improving,chen2004tcp}
+Thus, this report reviews some of the problems/challenges that affect TCP performance in MANET. The report also covers a review of some proposed protocol in the literature as means of improving TCP performance in MANET.
+
+Challenges that Affect TCP Performance in MANET:
+TCP just like in a wired network is also needed in MANET environment for a reliable transfer of packet over the network. However, due to MANET mobility nature, TCP had not recorded an optimum performance in the MANET environment. Some of the problems and challenges as were sited in some literature \cite{wang2002improving,chen2004tcp} that had led to TCP under performance in MANET include:
+•	Channel errors
+•	Medium contention and collision
+•	Mobility
+•	Multi-path routing and congestion
+•	Energy/Power efficiency
+
+\begin{enumerate}
+\item Channel Errors: 
+In MANET, due to signal effects, wireless links are prone to high bit error rates which as a result would lead to high loss of TCP data segment or acknowledgment. TCP sensing this bit rate loss in MANET would unnecessary invoke congestion control which leads to low throughput performance and degradation in the network.
+\item Medium Contention and Collision:  The media access control (MAC) affects the TCP performance at the multi-hop network such as in the case of ad hoc network. The key problems associated with MAC protocol as it pertains to TCP performance in MANET include the hidden and exposed terminal problem as well as fairness.  The effects of these problems (Hidden and exposed) in a MANET environment affects TCP performance in MANET. When TCP run over mac 802.11, the instability of access media sharing  by the node that were caused by hidden and exposed terminal problem becomes a serious issue for MANET performance. Collisions and exposed terminal problem are two majors’ problems in MANET which prevents one node from reaching or detecting the other node within a transmission range. So if a node cannot reach its adjacent node for several times, it will trigger a route failure response, which in turn will cause the source node to start route discovery.  Before anew route is found, no data packet can be sent out. Thus, during this process, TCP sender has to wait and assumes that there is a packet loss and will as a result invoke congestion control algorithm when it senses a timeout. This would consequently lead to an oscillation of TCP throughput.
+\item Mobility: The movement of nodes in an Ad hoc network induces link and route failure between the nodes, as nodes moves out of the transmission or detection range. Apparently, the link breakage and route failure would cause packet loss during packet transmission. Because TCP always assumes that any packet loss in MANET is due to congestion, it (TCP) would as a result invoke it's congest control algorithm which is not proper in this case. At the same time new route discovery may take longer time than TCP sender RTO. TCP sender will invoke congestion control if route discovery time is longer than RTO.
+\item Multi-path Routing:Routes in ad hoc network are short-lived due to the frequent link breakages and route failures. When routes fail, the routes needs to be re-computed in other to get them associate with the neighboring routes. The routes re-computation induces network delays. In other to reduce the associated delays in the route-computation, routing protocol such as temporally ordered routing algorithm (TORA)  helps to maintain routes between node sender and receiver pair and use multi path routing to transmit packet. As well, the packets may not arrive in an ordered format as they were sent from different paths. TCP, unaware of multi-path routing in MANET would misinterpret such out of order packet as congestion and consequently would needlessly invoke its congestion control mechanism.
+\item Congestion: In MANET, TCP interprets every packet loss as a result of congestion. However, due to frequent route changes, unpredictable variable mac delays, the correlation between congestion window size and tolerable data rate for a route is no longer valid in ad hoc network. 
+\item Energy Efficiency:
+  MANET being a baseless network, an attempt in balancing the node energy usage becomes an issue. Since each node acts as a router as well as end system,unnecessary retransmissions of TCP segments consumes the scarce power resource causing inefficient utilization of available power. Thus, finding a way to strike a balance between low energy consumption and high session throughput is still an area of research interest.
+\end{enumerate}
+
+Improve TCP Performance in MANET:
+Some protocols such as TCP-F,TCP-ELFNhad been proposed in the literature \cite{wang2002improving}  as means to improve the TCP performance in MANET. The protocols  addressed and offer solutions to the problems of (mobility, channel errors, medium contention and collision, multi-path routing and congestion) faced by TCP in the ad hoc network environment.
+\begin{itemize} 
+      \item TCP Feed Back : TCP-F protocol was proposed as a means to overcome the problems of TCP false reaction and assumption on route failures in MANET. With TCP-F in a node, when network layer at any node detects a route disruption, the node will send a Route Failure notification (RFN) packet to the source node. The TCP sender goes into a snoozing sate by canceling the sending of packets and freezes all its variables such as timers and congestion windows. The sender remains in the snoozing state until it is notified of the restoration of the route through a route re-establishment notification(RRN) packet from an intermediate node, it will then resumes transmission from the frozen state. 
+\item TCP Explicit Link Failure Notification - (TCP-ELFN) : TCP-ELFN operation mechanism is based on a Dynamic source routing protocol (DSR). The role of TCP-ELFN in a network is to inform the TCP sender node about link and route failures [5]. This will enable the sender node not to respond to the failures as if the failures are due to congestion.The operation of TCP-ELFN is similar to TCP-F. Both protocols allow the sender node to enter into snooze state and avoid unnecessary retransmission and congestion control which leads to throughput and bandwidth over usage. However, neither TCP-ELFN nor TCP-F solves the effects of congestion, out-of-order packets or bit errors which are quite common in MANET.Both protocols use the same parameter set including congestion window size, and RTO after route re-establishment which are also the same before the route failure.These may cause problem because congestion window size and RTO are not specific.
+\end{itemize}
+
+Moreover  performance metrics of TCP performance in a mobile ad hoc network are normally gathered using experiments. For this project, I built TCL scripts to visualize TCP packets movement in MANET.
+
+\section{Tools used}
+ For this project I used TCL tool as the scripting language for my project.For network infrastructure,TCL is mostly used  because of its syntax  flexibility. All data types can be manipulated as strings and source code. It has close integration with GUI window interface. It overs flexibility in variable substitution.
+\section {Solution}
+As a way of solving this issue, I will set up  nodes in a MANET environment  enabled with a TCP protocol.The node and parameter setup will be done using  TCL script
+It will be in such a way that packet will be sent from node 1 to node 2 to node 3. The packet ability to reach to their intended destination all depends on the TCP action in the nodes.During this process, I will be able to analyze the  TCP performance through the packet movements, the time it took  for a packet from node 1 to reach to node 2, the number of packet sent, the ones lost on the way.  
+My program involves a TCL script to demonstrate TCP packet flow movement in set nodes .
+The TCL script will create nodes.The script will connect the link between the nodes and attach a TCP packet within the nodes
+A GUI interface will serve as container for the nodes will be created using the TCL scripting.
+TCP  packet are meant to flow between the nodes and performance is recorded in a file.
+The different color of the packet differentiate the nodes the packets are coming from and easy to see the drop packets
+The rate of packet dropped and delivered packet will be tracked and output in a different file.
+\section{Learning Curve}
+During the project,I learnt and applied application tools such as Git,TCL,makefiles. Unlike before, learning these tools during the course of my project had given me a leap forward in doing my research. I have more confidence in completing in timely manner the aspect of my research where these tools are applied. 
+
+\section {appendix}
+Here is list of my reference papers for my project area:
+
+1:  Xiang Chen, Hongqiang Zhai, Jianfeng Wang, and Yuguang Fang. Tcp
+performance over mobile ad hoc networks. Electrical and Computer Engineering, Canadian Journal 
+
+2:  Feng Wang and Yongguang Zhang. Improving tcp performance over mo-
+bile ad-hoc networks with out-of-order detection and response. In Proceedings of the 3rd ACM international symposium on Mobile ad hoc net-
+working and  computing, pages 
+
+B: These papers are important because the authors discussed the fundamental issues of  TCP performance in MANET.
+The papers also clearly stated  the concept of TCP,MANET and how to gather performance analysis for TCP in MANET. I rate both papers 10, because they are of high relevant to my work.
+
+
+
+\bibliographystyle{plain}	% (uses file "plain.bst")
+\bibliography{project}
+
+\end{document}
